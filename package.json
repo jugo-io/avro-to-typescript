@@ -43,8 +43,7 @@
     "avsc": "^5.4.13",
     "command-line-args": "^5.0.2",
     "command-line-usage": "^5.0.5",
-    "fs-extra": "^5.0.0",
-    "typescript-memoize": "^1.0.0-alpha.3"
+    "fs-extra": "^5.0.0"
   },
   "devDependencies": {
     "@degordian/standards": "^1.0.8",
