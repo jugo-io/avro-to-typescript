@@ -27,7 +27,7 @@ export class TradeCollection extends BaseAvroRecord implements TradeCollectionIn
     public market: string = "";
     public trades: Trade[] = [];
 
-    public static readonly subject: string = "trade-collection";
+    public static readonly subject: string = "com.example.avro.TradeCollection";
     public static readonly schema: object = {
     "type": "record",
     "name": "TradeCollection",

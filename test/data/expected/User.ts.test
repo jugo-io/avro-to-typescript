@@ -49,7 +49,7 @@ export class User extends BaseAvroRecord implements UserInterface {
     public toDoItems!: ToDoItem[];
     public source: string = "organic";
 
-    public static readonly subject: string = "user";
+    public static readonly subject: string = "com.example.avro.User";
     public static readonly schema: object = {
     "type": "record",
     "name": "User",

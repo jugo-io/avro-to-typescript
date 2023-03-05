@@ -10,7 +10,7 @@ export class RecordWithEnumDefault extends BaseAvroRecord implements RecordWithE
 
     public flavor: Flavor = Flavor.VANILLA;
 
-    public static readonly subject: string = "record-with-enum-default";
+    public static readonly subject: string = "records.RecordWithEnumDefault";
     public static readonly schema: object = {
     "type": "record",
     "name": "RecordWithEnumDefault",

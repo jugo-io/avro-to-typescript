@@ -15,7 +15,7 @@ export class RecordWithRecord extends BaseAvroRecord implements RecordWithRecord
     public thing1!: Thing;
     public thing2: Thing = {"id":0};
 
-    public static readonly subject: string = "record-with-record";
+    public static readonly subject: string = "records.RecordWithRecord";
     public static readonly schema: object = {
     "type": "record",
     "name": "RecordWithRecord",
