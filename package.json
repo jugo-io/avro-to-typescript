@@ -22,18 +22,18 @@
     "test": "test"
   },
   "scripts": {
-    "start": "npm run build && node ./dist/src/index.js",
+    "start": "yarn run build && node ./dist/src/index.js",
     "build": "rm -rf dist && tsc",
-    "prepublishOnly": "npm run test && npm run generate-barrels",
+    "prepublishOnly": "yarn run test && yarn run generate-barrels",
     "generate-barrels": "barrelsby --directory src/ --delete --include components src/interfaces --exclude base Avro/compression Avro/schema_registry",
-    "test": "npm run tslint & npm run mocha",
+    "test": "yarn run lint & yarn run mocha",
     "lint": "eslint '**/*.ts'",
     "lint:fix": "eslint '**/*.ts' --fix",
     "prettier": "prettier --check **/*.ts",
     "prettier:fix": "prettier --write **/*.ts",
     "mocha": "mocha dist/test --reporter=nyan --recursive",
-    "travis:test": "npm run build && npm run test",
-    "premocha": "npm run build"
+    "travis:test": "yarn run build && yarn run test",
+    "premocha": "yarn run build"
   },
   "author": "chasdevs@gmail.com",
   "license": "MIT",
