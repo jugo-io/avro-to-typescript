@@ -1,11 +1,11 @@
-import * as fs from 'fs';
-import * as path from 'path';
-import { DirHelper } from '../../helpers/DirHelper';
-import { TypeHelper } from '../../helpers/TypeHelper';
-import { CompilerOutput } from '../../interfaces/CompilerOutput';
-import { ExportModel } from '../../models/ExportModel';
-import { ClassConverter } from '../Converters/ClassConverter';
-import { BaseCompiler } from './base/BaseCompiler';
+import * as fs from "fs";
+import * as path from "path";
+import { DirHelper } from "../../helpers/DirHelper";
+import { TypeHelper } from "../../helpers/TypeHelper";
+import { CompilerOutput } from "../../interfaces/CompilerOutput";
+import { ExportModel } from "../../models/ExportModel";
+import { ClassConverter } from "../Converters/ClassConverter";
+import { BaseCompiler } from "./base/BaseCompiler";
 
 export class Compiler extends BaseCompiler {
   public exports: ExportModel[];
@@ -61,7 +61,7 @@ export class Compiler extends BaseCompiler {
 
     return {
       class: data.name,
-      dir: outputDir
+      dir: outputDir,
     };
   }
 
@@ -84,7 +84,7 @@ export class Compiler extends BaseCompiler {
     if (!fs.existsSync(avroRecordPath)) {
       fs.writeFileSync(
         avroRecordPath,
-        'export { BaseAvroRecord } from "@chasdevs/avro-to-typescript";\n'
+        'export { BaseAvroRecord } from "@jugo-io/avro-to-typescript";\n'
       );
     }
   }
