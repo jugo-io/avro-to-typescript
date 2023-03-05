@@ -67,7 +67,11 @@ export class RecordConverter extends BaseConverter {
 
         if (TypeHelper.isRecordType(type)) {
             if (! (type.name in this.recordCache) ) {
-                this.recordCache[type.name.toString()] = type;
+                if (type.namespace) {
+                    this.recordCache[`${type.namespace}.${type.name.toString()}`] = type;
+                } else {
+                    this.recordCache[type.name.toString()] = type;
+                }
                 this.interfaceRows.push(...this.extractInterface(type));
                 this.interfaceRows.push("");
             }
