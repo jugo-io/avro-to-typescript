@@ -1,12 +1,10 @@
-import { AvroRecord } from "./AvroRecord";
+import { AvroRecord } from './AvroRecord';
 
 export abstract class BaseAvroRecord implements AvroRecord {
+  public static readonly subject: string = '';
+  public static readonly schema = {};
 
-    public static readonly subject: string = "";
-    public static readonly schema = {};
+  public abstract schema(): any;
 
-    public abstract schema(): any;
-
-    public abstract subject(): string;
-
+  public abstract subject(): string;
 }

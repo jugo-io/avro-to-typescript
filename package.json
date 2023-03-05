@@ -27,8 +27,10 @@
     "prepublishOnly": "npm run test && npm run generate-barrels",
     "generate-barrels": "barrelsby --directory src/ --delete --include components src/interfaces --exclude base Avro/compression Avro/schema_registry",
     "test": "npm run tslint & npm run mocha",
-    "tslint": "tslint --project tsconfig.json --format stylish",
-    "tslint-jenkins": "tslint --project tsconfig.json -o tslint.xml -t checkstyle",
+    "lint": "eslint '**/*.ts'",
+    "lint:fix": "eslint '**/*.ts' --fix",
+    "prettier": "prettier --check **/*.ts",
+    "prettier:fix": "prettier --write **/*.ts",
     "mocha": "mocha dist/test --reporter=nyan --recursive",
     "travis:test": "npm run build && npm run test",
     "premocha": "npm run build"
@@ -40,6 +42,8 @@
   },
   "homepage": "https://github.com/chasdevs/avro-to-typescript#readme",
   "dependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.54.0",
+    "@typescript-eslint/parser": "^5.54.0",
     "avsc": "^5.4.13",
     "command-line-args": "^5.0.2",
     "command-line-usage": "^5.0.5",
@@ -55,8 +59,11 @@
     "@types/jest": "^29.4.0",
     "@types/node": "^9.6.21",
     "barrelsby": "^2.5.1",
+    "eslint": "^8.8.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-import": "^2.25.4",
+    "eslint-plugin-prettier": "^4.0.0",
     "mocha-typescript": "^1.1.16",
-    "tslint": "^5.10.0",
     "typescript": "^4.0.0"
   }
 }

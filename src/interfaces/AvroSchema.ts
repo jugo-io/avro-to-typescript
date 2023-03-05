@@ -1,45 +1,50 @@
 export interface AvroSchema {
-    type: TypeNames;
+  type: TypeNames;
 }
 
 export type Type = NameOrType | NameOrType[];
-export type NameOrType = TypeNames | RecordType | ArrayType | NamedType | LogicalType;
-export type TypeNames = "record" | "array" | "null" | "map" | string;
+export type NameOrType =
+  | TypeNames
+  | RecordType
+  | ArrayType
+  | NamedType
+  | LogicalType;
+export type TypeNames = 'record' | 'array' | 'null' | 'map' | string;
 
 export interface Field {
-    name: string;
-    type: Type;
-    default?: string | number | null | boolean | any[];
+  name: string;
+  type: Type;
+  default?: string | number | null | boolean | any[];
 }
 
 export interface RecordType extends AvroSchema {
-    type: "record";
-    name: string;
-    namespace: string;
-    fields: Field[];
+  type: 'record';
+  name: string;
+  namespace: string;
+  fields: Field[];
 }
 
 export interface ArrayType extends AvroSchema {
-    type: "array";
-    items: Type;
+  type: 'array';
+  items: Type;
 }
 
 export interface MapType extends AvroSchema {
-    type: "map";
-    values: Type;
+  type: 'map';
+  values: Type;
 }
 
 export interface EnumType extends AvroSchema {
-    type: "enum";
-    name: string;
-    symbols: string[];
+  type: 'enum';
+  name: string;
+  symbols: string[];
 }
 
 export interface NamedType extends AvroSchema {
-    type: string;
+  type: string;
 }
 
 export interface LogicalType extends AvroSchema {
-    type: string;
-    logicalType: string;
+  type: string;
+  logicalType: string;
 }

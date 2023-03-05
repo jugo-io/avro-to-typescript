@@ -1,9 +1,6 @@
 {
   "defaultSeverity": "error",
-  "extends": [
-    "@degordian/standards/tslint",
-    "tslint-sonarts"
-  ],
+  "extends": ["@degordian/standards/tslint"],
   "jsRules": {},
   "rules": {
     "no-console": false,

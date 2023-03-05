@@ -1,4 +1,4 @@
 export interface CompilerOutput {
-    class: string;
-    dir: string;
+  class: string;
+  dir: string;
 }
