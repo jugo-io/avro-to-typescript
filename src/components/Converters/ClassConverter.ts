@@ -52,7 +52,6 @@ export class ClassConverter extends RecordConverter {
     const rows: string[] = [];
     const dirsUp: number = data.namespace.split('.').length;
 
-    rows.push(`// tslint:disable`);
     rows.push(
       `import { BaseAvroRecord } from "` +
         '../'.repeat(dirsUp) +

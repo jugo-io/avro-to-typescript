@@ -1,4 +1,3 @@
-// tslint:disable
 import { BaseAvroRecord } from "../../../BaseAvroRecord";
 import { TradeType } from "./TradeTypeEnum";
 import { TradeDirection } from "./TradeDirectionEnum";
