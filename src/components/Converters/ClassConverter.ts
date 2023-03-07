@@ -1,12 +1,12 @@
-import { SpecialCharacterHelper } from '../../helpers/SpecialCharacterHelper';
-import { TypeHelper } from '../../helpers/TypeHelper';
-import { RecordType } from '../../interfaces/AvroSchema';
-import { ExportModel } from '../../models/ExportModel';
-import { RecordConverter } from './RecordConverter';
+import { SpecialCharacterHelper } from "../../helpers/SpecialCharacterHelper";
+import { TypeHelper } from "../../helpers/TypeHelper";
+import { RecordType } from "../../interfaces/AvroSchema";
+import { ExportModel } from "../../models/ExportModel";
+import { RecordConverter } from "./RecordConverter";
 
 export class ClassConverter extends RecordConverter {
   protected interfaceRows: string[] = [];
-  protected interfaceSuffix = 'Interface';
+  protected interfaceSuffix = "Interface";
   protected TAB = SpecialCharacterHelper.TAB;
 
   protected classRows: string[] = [];
@@ -16,7 +16,7 @@ export class ClassConverter extends RecordConverter {
     data = this.getData(data) as RecordType;
 
     this.classRows.push(...this.extractClass(data));
-    this.importRows.push(...this.extractImports(data));
+    this.importRows.push(...this.extractImports());
 
     this.getExportModels(data);
 
@@ -28,7 +28,7 @@ export class ClassConverter extends RecordConverter {
     const classExportModel: ExportModel = new ExportModel();
     const interfaceExportModel: ExportModel = new ExportModel();
 
-    importExportModel.name = 'imports';
+    importExportModel.name = "imports";
     importExportModel.content = this.importRows.join(
       SpecialCharacterHelper.NEW_LINE
     );
@@ -48,15 +48,8 @@ export class ClassConverter extends RecordConverter {
     return classExportModel;
   }
 
-  protected extractImports(data: RecordType): string[] {
+  protected extractImports(): string[] {
     const rows: string[] = [];
-    const dirsUp: number = data.namespace.split('.').length;
-
-    rows.push(
-      `import { BaseAvroRecord } from "` +
-        '../'.repeat(dirsUp) +
-        `BaseAvroRecord";`
-    );
 
     for (const enumFile of this.enumExports) {
       const importLine = `import { ${enumFile.name} } from "./${enumFile.name}Enum";`;
@@ -80,68 +73,25 @@ export class ClassConverter extends RecordConverter {
     );
     rows.push(``);
 
-    rows.push(
-      `export class ${data.name} extends BaseAvroRecord implements ${data.name}${this.interfaceSuffix} {`
-    );
-    rows.push(``);
-
     for (const field of data.fields) {
       let fieldType;
-      let classRow;
 
       // If the type was defined earlier, fetch the entire thing from the cache.
       const type = this.recordCache[field.type.toString()] || field.type;
 
       if (TypeHelper.hasDefault(field) || TypeHelper.isOptional(field.type)) {
-        const defaultValue = TypeHelper.hasDefault(field)
-          ? ` = ${TypeHelper.getDefault(field)}`
-          : '';
         fieldType = `${this.getField(field.name, type)}`;
-        classRow = `${TAB}public ${fieldType}${defaultValue};`;
       } else {
         const convertedType = this.convertType(type);
         fieldType = `${field.name}: ${convertedType}`;
-        classRow = `${TAB}public ${field.name}!: ${convertedType};`;
       }
 
       interfaceRows.push(`${this.TAB}${fieldType};`);
-
-      rows.push(classRow);
     }
 
-    rows.push(``);
-    rows.push(
-      `${TAB}public static readonly subject: string = "${
-        data.namespace ? [data.namespace, data.name].join('.') : data.name
-      }";`
-    );
-    rows.push(
-      `${TAB}public static readonly schema: object = ${JSON.stringify(
-        data,
-        null,
-        4
-      )}`
-    );
-    rows.push(``);
-    rows.push(`${TAB}public schema(): object {`);
-    rows.push(`${TAB}${TAB}return ${data.name}.schema;`);
-    rows.push(`${TAB}}`);
-    rows.push(``);
-    rows.push(`${TAB}public subject(): string {`);
-    rows.push(`${TAB}${TAB}return ${data.name}.subject;`);
-    rows.push(`${TAB}}`);
-    rows.push(`}`);
-
-    interfaceRows.push('}');
+    interfaceRows.push("}");
     this.interfaceRows.push(...interfaceRows);
 
     return rows;
-  }
-
-  private toKebabCase(str: string): string {
-    return str
-      .split(/(?=[A-Z])/)
-      .join('-')
-      .toLowerCase();
   }
 }
