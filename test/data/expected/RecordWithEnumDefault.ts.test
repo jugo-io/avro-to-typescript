@@ -6,6 +6,27 @@ export interface RecordWithEnumDefaultInterface {
     flavor: Flavor;
 }
 
+export const RecordWithEnumDefaultSchema = {
+    "type": "record",
+    "name": "RecordWithEnumDefault",
+    "namespace": "records",
+    "fields": [
+        {
+            "name": "flavor",
+            "type": {
+                "type": "enum",
+                "name": "Flavor",
+                "symbols": [
+                    "VANILLA",
+                    "CHOCOLATE"
+                ],
+                "default": "CHOCOLATE"
+            },
+            "default": "VANILLA"
+        }
+    ]
+};
+
 export class RecordWithEnumDefault extends BaseAvroRecord implements RecordWithEnumDefaultInterface {
 
     public flavor: Flavor = Flavor.VANILLA;

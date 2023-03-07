@@ -10,6 +10,34 @@ export interface RecordWithRecordInterface {
     thing2: Thing;
 }
 
+export const RecordWithRecordSchema = {
+    "type": "record",
+    "name": "RecordWithRecord",
+    "namespace": "records",
+    "fields": [
+        {
+            "name": "thing1",
+            "type": {
+                "type": "record",
+                "name": "Thing",
+                "fields": [
+                    {
+                        "name": "id",
+                        "type": "int"
+                    }
+                ]
+            }
+        },
+        {
+            "name": "thing2",
+            "type": "Thing",
+            "default": {
+                "id": 0
+            }
+        }
+    ]
+};
+
 export class RecordWithRecord extends BaseAvroRecord implements RecordWithRecordInterface {
 
     public thing1!: Thing;

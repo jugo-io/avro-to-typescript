@@ -75,6 +75,12 @@ export class ClassConverter extends RecordConverter {
     interfaceRows.push(
       `export interface ${data.name}${this.interfaceSuffix} {`
     );
+
+    rows.push(
+      `export const ${data.name}Schema = ${JSON.stringify(data, null, 4)};`
+    );
+    rows.push(``);
+
     rows.push(
       `export class ${data.name} extends BaseAvroRecord implements ${data.name}${this.interfaceSuffix} {`
     );
