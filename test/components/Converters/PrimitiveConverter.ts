@@ -15,7 +15,9 @@ describe('Compile primitive types', () => {
   };
 
   for (const expected in primitivesMap) {
-    if (primitivesMap.hasOwnProperty(expected) === false) {
+    if (
+      Object.prototype.hasOwnProperty.call(primitivesMap, expected) === false
+    ) {
       continue;
     }
 

@@ -1,5 +1,5 @@
-import { OAuthStatus } from "./OAuthStatusEnum";
-import { ToDoStatus } from "./ToDoStatusEnum";
+import { OAuthStatus } from './OAuthStatusEnum';
+import { ToDoStatus } from './ToDoStatusEnum';
 
 export interface EmailAddress {
     address: string;

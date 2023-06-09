@@ -1,5 +1,5 @@
-import { TradeType } from "./TradeTypeEnum";
-import { TradeDirection } from "./TradeDirectionEnum";
+import { TradeType } from './TradeTypeEnum';
+import { TradeDirection } from './TradeDirectionEnum';
 
 export interface Trade {
     id: string;
