@@ -1,0 +1,40 @@
+name: Build PR
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    types:
+      - opened
+      - reopened
+      - edited
+      - synchronize
+
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Git clone the repository
+        uses: actions/checkout@v3
+
+      - name: Install Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: '14.x'
+
+      - name: Npm Install
+        run: npm install
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_GITHUB_SECRET }}
+
+      - name: Npm Build
+        run: npm build
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_GITHUB_SECRET }}
+
+      - name: Npm Test
+        run: npm test
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_GITHUB_SECRET }}
