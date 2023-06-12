@@ -84,7 +84,7 @@ export class Compiler extends BaseCompiler {
     if (!fs.existsSync(avroRecordPath)) {
       fs.writeFileSync(
         avroRecordPath,
-        'export { BaseAvroRecord } from "@jugo-io/avro-to-typescript";\n'
+        `export { BaseAvroRecord } from '@jugo-io/avro-to-typescript';\n`
       );
     }
   }

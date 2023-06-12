@@ -1,0 +1,40 @@
+name: Build PR
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    types:
+      - opened
+      - reopened
+      - edited
+      - synchronize
+
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Git clone the repository
+        uses: actions/checkout@v3
+
+      - name: Install Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: '14.x'
+
+      - name: Yarn Install
+        run: yarn install
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_GITHUB_SECRET }}
+
+      - name: Yarn Build
+        run: yarn build
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_GITHUB_SECRET }}
+
+      - name: Yarn Test
+        run: yarn test
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_GITHUB_SECRET }}

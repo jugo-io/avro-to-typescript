@@ -1,1 +1,1 @@
-export { BaseAvroRecord } from "@jugo-io/avro-to-typescript";
+export { BaseAvroRecord } from '@jugo-io/avro-to-typescript';

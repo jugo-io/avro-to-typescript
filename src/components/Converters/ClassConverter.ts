@@ -1,12 +1,12 @@
-import { SpecialCharacterHelper } from "../../helpers/SpecialCharacterHelper";
-import { TypeHelper } from "../../helpers/TypeHelper";
-import { RecordType } from "../../interfaces/AvroSchema";
-import { ExportModel } from "../../models/ExportModel";
-import { RecordConverter } from "./RecordConverter";
+import { SpecialCharacterHelper } from '../../helpers/SpecialCharacterHelper';
+import { TypeHelper } from '../../helpers/TypeHelper';
+import { RecordType } from '../../interfaces/AvroSchema';
+import { ExportModel } from '../../models/ExportModel';
+import { RecordConverter } from './RecordConverter';
 
 export class ClassConverter extends RecordConverter {
   protected interfaceRows: string[] = [];
-  protected interfaceSuffix = "Interface";
+  protected interfaceSuffix = 'Interface';
   protected TAB = SpecialCharacterHelper.TAB;
 
   protected classRows: string[] = [];
@@ -28,7 +28,7 @@ export class ClassConverter extends RecordConverter {
     const classExportModel: ExportModel = new ExportModel();
     const interfaceExportModel: ExportModel = new ExportModel();
 
-    importExportModel.name = "imports";
+    importExportModel.name = 'imports';
     importExportModel.content = this.importRows.join(
       SpecialCharacterHelper.NEW_LINE
     );
@@ -52,7 +52,7 @@ export class ClassConverter extends RecordConverter {
     const rows: string[] = [];
 
     for (const enumFile of this.enumExports) {
-      const importLine = `import { ${enumFile.name} } from "./${enumFile.name}Enum";`;
+      const importLine = `import { ${enumFile.name} } from './${enumFile.name}Enum';`;
       rows.push(importLine);
     }
 
@@ -89,7 +89,7 @@ export class ClassConverter extends RecordConverter {
       interfaceRows.push(`${this.TAB}${fieldType};`);
     }
 
-    interfaceRows.push("}");
+    interfaceRows.push('}');
     this.interfaceRows.push(...interfaceRows);
 
     return rows;
