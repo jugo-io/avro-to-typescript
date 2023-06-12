@@ -1,11 +1,11 @@
-protocol x {
+protocol RecordWithRecord {
 
   import idl "./Thing.avdl";
 
   @namespace("records")
   record RecordWithRecord {
     records.Thing thing1;
-    records.Thing thing2 = {"id": 0};
+    records.Thing thing2 = {"id": 0, "timestamp":null};
   }
 
 }

@@ -1,8 +1,9 @@
-protocol x {
+protocol Thing {
 
   @namespace("records")
   record Thing {
     int id;
+    timestamp_ms? timestamp;
   }
 
 }

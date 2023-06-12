@@ -19,6 +19,16 @@ jobs:
       - name: Git clone the repository
         uses: actions/checkout@v3
 
+      - name: Setup Java
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '11'
+          cache: 'gradle'
+
+      - name: Generate Avro Schema (.avsc) from DL (.avdl)
+        run: ./gradlew :generateSchema --no-daemon
+
       - name: Install Node
         uses: actions/setup-node@v3
         with:
