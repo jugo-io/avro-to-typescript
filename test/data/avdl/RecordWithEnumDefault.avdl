@@ -1,4 +1,4 @@
-protocol x {
+protocol RecordWithEnumDefault {
 
   @namespace("records")
   enum Flavor {

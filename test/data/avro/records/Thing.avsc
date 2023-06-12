@@ -5,5 +5,11 @@
   "fields" : [ {
     "name" : "id",
     "type" : "int"
+  }, {
+    "name" : "timestamp",
+    "type" : [ "null", {
+      "type" : "long",
+      "logicalType" : "timestamp-millis"
+    } ]
   } ]
 }

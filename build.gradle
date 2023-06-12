@@ -1,6 +1,13 @@
 plugins {
 	id 'java'
-	id 'com.commercehub.gradle.plugin.avro' version '0.17.0'
+	id 'com.github.davidmc24.gradle.plugin.avro' version '1.7.1'
+}
+
+repositories {
+	mavenCentral()
+}
+dependencies {
+	implementation 'org.apache.avro:avro:1.11.0'
 }
 
 ext {
@@ -9,16 +16,20 @@ ext {
 	avscGenDir = 'test/data/avro'
 }
 
-task generateAvpr(type: com.commercehub.gradle.plugin.avro.GenerateAvroProtocolTask) {
-	source(file(avdlSrcDir))
-	outputDir = file(avprGenDir)
+import com.github.davidmc24.gradle.plugin.avro.GenerateAvroProtocolTask
+import com.github.davidmc24.gradle.plugin.avro.GenerateAvroSchemaTask
+
+apply plugin: "com.github.davidmc24.gradle.plugin.avro-base"
+
+def generateAvpr = tasks.register("generateAvpr", GenerateAvroProtocolTask) {
+	source file('test/data/avdl')
+	include("**/*.avdl")
+	outputDir = file('test/data/avpr')
 }
 
-task generateAvsc(type: com.commercehub.gradle.plugin.avro.GenerateAvroSchemaTask) {
+tasks.register("generateSchema", GenerateAvroSchemaTask) {
 	dependsOn generateAvpr
-	source(file(avprGenDir))
+	source file(avprGenDir)
+	include("**/*.avpr")
 	outputDir = file(avscGenDir)
-	doLast {
-		delete avprGenDir
-	}
 }

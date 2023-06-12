@@ -10,13 +10,20 @@
       "fields" : [ {
         "name" : "id",
         "type" : "int"
+      }, {
+        "name" : "timestamp",
+        "type" : [ "null", {
+          "type" : "long",
+          "logicalType" : "timestamp-millis"
+        } ]
       } ]
     }
   }, {
     "name" : "thing2",
     "type" : "Thing",
     "default" : {
-      "id" : 0
+      "id" : 0,
+      "timestamp" : null
     }
   } ]
 }
